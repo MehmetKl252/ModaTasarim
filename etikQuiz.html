@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Yapay Zekâ ve Etik – Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            padding: 20px;
+        }
+        .quiz-container {
+            max-width: 800px;
+            background: #fff;
+            margin: auto;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question p {
+            font-weight: bold;
+        }
+        label {
+            display: block;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #1d4ed8;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>Yapay Zekâ, Etik ve Telif Hakları – Quiz</h1>
+
+    <form id="quizForm">
+
+        <div class="question">
+            <p>1. Yapay zekâ ile üretilen tasarımlarda etik açıdan en doğru yaklaşım hangisidir?</p>
+            <label><input type="radio" name="q1" value="a"> YZ kullandığını gizlemek</label>
+            <label><input type="radio" name="q1" value="b"> YZ sürecini şeffaf şekilde belirtmek</label>
+            <label><input type="radio" name="q1" value="c"> Tüm sorumluluğu yazılıma yüklemek</label>
+        </div>
+
+        <div class="question">
+            <p>2. Kültürel kisve (cultural appropriation) neyi ifade eder?</p>
+            <label><input type="radio" name="q2" value="a"> Kültürler arası iş birliğini</label>
+            <label><input type="radio" name="q2" value="b"> Kültürel unsurların bağlamından koparılmasını</label>
+            <label><input type="radio" name="q2" value="c"> Dijital sürdürülebilirliği</label>
+        </div>
+
+        <div class="question">
+            <p>3. Sürdürülebilirlik aldatmacası hangi durumla ilişkilidir?</p>
+            <label><input type="radio" name="q3" value="a"> YZ ile fiziksel atığı azaltmak</label>
+            <label><input type="radio" name="q3" value="b"> Dijital üretimi tamamen durdurmak</label>
+            <label><input type="radio" name="q3" value="c"> Aşırı hızlı ve kontrolsüz tasarım üretimi</label>
+        </div>
+
+        <div class="question">
+            <p>4. Bir eserin telif hakkıyla korunabilmesi için genellikle ne gereklidir?</p>
+            <label><input type="radio" name="q4" value="a"> YZ tarafından üretilmiş olması</label>
+            <label><input type="radio" name="q4" value="b"> İnsan emeği içermesi</label>
+            <label><input type="radio" name="q4" value="c"> Ücretsiz araç kullanılması</label>
+        </div>
+
+        <div class="question">
+            <p>5. YZ çıktısını bireysel emek gibi sunmak hangi etik ihlale girer?</p>
+            <label><input type="radio" name="q5" value="a"> İntihal ve yanıltma</label>
+            <label><input type="radio" name="q5" value="b"> Sürdürülebilirlik</label>
+            <label><input type="radio" name="q5" value="c"> Akademik şeffaflık</label>
+        </div>
+
+        <div class="question">
+            <p>6. Özgünlük yalnızca ne anlama gelmez?</p>
+            <label><input type="radio" name="q6" value="a"> İlk kez üretilmiş olmak</label>
+            <label><input type="radio" name="q6" value="b"> Yorum ve katkı içermek</label>
+            <label><input type="radio" name="q6" value="c"> Bağlam oluşturmak</label>
+        </div>
+
+        <div class="question">
+            <p>7. Akademik çalışmalarda YZ kullanımı için hangisi zorunludur?</p>
+            <label><input type="radio" name="q7" value="a"> Gizlilik</label>
+            <label><input type="radio" name="q7" value="b"> Şeffaflık</label>
+            <label><input type="radio" name="q7" value="c"> Anonimlik</label>
+        </div>
+
+        <div class="question">
+            <p>8. YZ tarafından üretilen içerikten hukuki olarak kim sorumludur?</p>
+            <label><input type="radio" name="q8" value="a"> Yapay zekâ</label>
+            <label><input type="radio" name="q8" value="b"> Yazılım firması</label>
+            <label><input type="radio" name="q8" value="c"> İnsan kullanıcı</label>
+        </div>
+
+        <div class="question">
+            <p>9. Hangi araç etik ve lisanslı veri setleriyle çalışmasıyla öne çıkar?</p>
+            <label><input type="radio" name="q9" value="a"> Midjourney</label>
+            <label><input type="radio" name="q9" value="b"> Adobe Firefly</label>
+            <label><input type="radio" name="q9" value="c"> Stable Diffusion (genel)</label>
+        </div>
+
+        <div class="question">
+            <p>10. Güvenli YZ kullanımında hangisi önerilir?</p>
+            <label><input type="radio" name="q10" value="a"> Yaşayan sanatçı isimleriyle prompt yazmak</label>
+            <label><input type="radio" name="q10" value="b"> YZ çıktısını olduğu gibi kullanmak</label>
+            <label><input type="radio" name="q10" value="c"> Hibrit (insan + YZ) üretim yapmak</label>
+        </div>
+
+        <button type="button" onclick="checkAnswers()">Quiz’i Bitir</button>
+    </form>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+function checkAnswers() {
+    const correctAnswers = {
+        q1: "b",
+        q2: "b",
+        q3: "c",
+        q4: "b",
+        q5: "a",
+        q6: "a",
+        q7: "b",
+        q8: "c",
+        q9: "b",
+        q10: "c"
+    };
+
+    let score = 0;
+    for (let q in correctAnswers) {
+        const selected = document.querySelector(`input[name="${q}"]:checked`);
+        if (selected && selected.value === correctAnswers[q]) {
+            score++;
+        }
+    }
+
+    document.getElementById("result").innerText =
+        `Sonuç: ${score} / 10 doğru`;
+}
+</script>
+
+</body>
+</html>
