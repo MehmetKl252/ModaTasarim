@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tasarım Rehberi: Metinden Gerçekliğe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .nav-pills {
+            display: flex;
+            gap: 15px;
+            padding: 30px 40px;
+            background: #f8f9fa;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-pill {
+            padding: 15px 30px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .nav-pill:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(44, 83, 100, 0.3);
+        }
+        
+        .nav-pill.active {
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tool-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            margin-bottom: 25px;
+        }
+
+        .tool-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid #0f2027;
+            transition: all 0.3s;
+        }
+        
+        .tool-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(15, 32, 39, 0.2);
+        }
+        
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .tool-icon {
+            width: 50px;
+            height: 50px;
+            background: #0f2027;
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .tool-title {
+            font-size: 1.6em;
+            color: #0f2027;
+            font-weight: 700;
+        }
+        
+        .category-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #e1f5fe;
+            color: #0288d1;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .workflow-box {
+            background: #f1f8e9;
+            border-left: 5px solid #689f38;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #0f2027;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Metinden Tasarıma: AI Rehberi</h1>
+            <p class="subtitle">Eskiz Renklendirme ve Sıfırdan Profesyonel Moda Tasarımı</p>
+        </header>
+        
+        <div class="nav-pills">
+            <div class="nav-pill active" onclick="showSection('leonardo')">💎 Leonardo.ai</div>
+            <div class="nav-pill" onclick="showSection('bing')">🌐 Bing & Microsoft</div>
+            <div class="nav-pill" onclick="showSection('sketch')">🖍️ Eskiz Boyama</div>
+            <div class="nav-pill" onclick="showSection('summary')">📊 Özet Tablo</div>
+        </div>
+        
+        <div class="content">
+            <div id="leonardo" class="section active">
+                <a href="https://leonardo.ai" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-icon">💎</div>
+                            <div class="tool-title">Leonardo.ai: Profesyonel Tasarım</div>
+                        </div>
+                        <span class="category-badge">En Popüler Freemium</span>
+                        <p>Moda tasarımcıları için kumaş dokusuna kadar detay veren en güçlü araçtır. Günlük 150 ücretsiz kredi ile yaklaşık 30-40 farklı tasarım oluşturabilirsiniz.</p>
+                        <div class="workflow-box" style="margin-top: 20px;">
+                            <strong>Önerilen Ayar:</strong> Leonardo Phoenix veya Photoreal modelini seçin. Görsel boyutunu 9:16 (Hikaye formatı) yapın.
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div id="bing" class="section">
+                <a href="https://www.bing.com/images/create" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-icon">🌐</div>
+                            <div class="tool-title">Bing Image Creator</div>
+                        </div>
+                        <span class="category-badge">Sınırsız Tasarım</span>
+                        <p>Kıyafet fikriniz elinizde yoksa sıfırdan üretmek için idealdir. Hızlı haklarınız bitse bile üretim yapmaya devam eder, sadece süresi biraz uzar.</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div id="sketch" class="section">
+                <div class="workflow-box">
+                    <h2 style="color: #33691e; margin-bottom: 15px;">🖍️ Kağıttaki Çizimi Fotoğrafa Dönüştürün</h2>
+                    <p style="margin-bottom: 10px;">Microsoft Copilot veya Gemini kullanarak el çizimlerinizi fotorealistik görsellere dönüştürebilirsiniz:</p>
+                    <ol style="margin-left: 20px; line-height: 1.8;">
+                        <li>Eskizinizin fotoğrafını sohbet kutusuna yükleyin.</li>
+                        <li><strong>Komut:</strong> "Bu moda eskizini temel alarak, modelin üzerinde gerçekçi bir [kıyafet adı] varmış gibi görsel oluştur."</li>
+                        <li>AI, çizimdeki pozunuzu koruyarak tasarımı renklendirir.</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div id="summary" class="section">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Araç Adı</th>
+                            <th>Kullanım Amacı</th>
+                            <th>Öne Çıkan Özellik</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Leonardo.ai</strong></td>
+                            <td>Metinden Moda Tasarımı</td>
+                            <td>Kumaş dokusu ve profesyonel kalite</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bing Creator</strong></td>
+                            <td>Sınırsız Fikir Üretimi</td>
+                            <td>Kredi bitse de sınırsız kullanım</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Copilot / Gemini</strong></td>
+                            <td>Eskiz Renklendirme</td>
+                            <td>Fotoğraf yükleyip boyama</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            const pills = document.querySelectorAll('.nav-pill');
+            pills.forEach(pill => pill.classList.remove('active'));
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
