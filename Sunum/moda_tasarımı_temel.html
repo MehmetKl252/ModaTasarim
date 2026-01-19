@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yapay Zeka ile Temel Moda Tasarımı</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .nav-pills {
+            display: flex;
+            gap: 15px;
+            padding: 30px 40px;
+            background: #f8f9fa;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-pill {
+            padding: 15px 30px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .nav-pill:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(44, 83, 100, 0.3);
+        }
+        
+        .nav-pill.active {
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tool-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            margin-bottom: 25px;
+        }
+
+        .tool-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid #0f2027;
+            transition: all 0.3s;
+        }
+        
+        .tool-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(15, 32, 39, 0.2);
+        }
+        
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .tool-icon {
+            width: 50px;
+            height: 50px;
+            background: #0f2027;
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .tool-title {
+            font-size: 1.6em;
+            color: #0f2027;
+            font-weight: 700;
+        }
+        
+        .category-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #e1f5fe;
+            color: #0288d1;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .workflow-box {
+            background: #f1f8e9;
+            border-left: 5px solid #689f38;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #0f2027;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .fabric-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .fabric-item {
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+            font-weight: bold;
+            color: #2c5364;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>👗 Yapay Zeka ile Moda Tasarımı</h1>
+            <p class="subtitle">Eskizden Podyum Kalitesinde Tasarımlara: Krea.ai Rehberi</p>
+        </header>
+        
+        <div class="nav-pills">
+            <div class="nav-pill active" onclick="showSection('how-to')">📋 Nasıl Tasarlanır?</div>
+            <div class="nav-pill" onclick="showSection('krea-guide')">🪄 Krea.ai Rehberi</div>
+            <div class="nav-pill" onclick="showSection('fabrics')">🧵 Kumaş İpuçları</div>
+            <div class="nav-pill" onclick="showSection('summary')">📊 Özet</div>
+        </div>
+        
+        <div class="content">
+            <div id="how-to" class="section active">
+                <div class="workflow-box">
+                    <h2 style="color: #33691e; margin-bottom: 15px;">🚀 Eskizden Tasarıma Geçiş Süreci</h2>
+                    <p style="margin-bottom: 15px;">Basit bir karalamayı podyum kalitesinde bir görsele dönüştürmek için şu adımları izleyin:</p>
+                    <ol style="margin-left: 20px; line-height: 1.8;">
+                        <li><strong>Fikrinizi Belirleyin:</strong> Tasarlamak istediğiniz kıyafetin ana hatlarını ve malzemesini düşünün.</li>
+                        <li><strong>Yapay Zeka Aracını Seçin:</strong> Gerçek zamanlı üretim için Krea.ai gibi araçları kullanın.</li>
+                        <li><strong>Komut (Prompt) Yazın:</strong> Kıyafetin türü, kumaşı, ışıklandırması ve stili hakkında detaylı İngilizce bilgi verin.</li>
+                        <li><strong>Anlık Çizim Yapın:</strong> Siz çizdikçe yapay zekanın tasarımı nasıl şekillendirdiğini izleyin ve kaydedin.</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div id="krea-guide" class="section">
+                <a href="https://www.krea.ai" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-icon">✨</div>
+                            <div class="tool-title">Krea.ai: Real-time Generation</div>
+                        </div>
+                        <span class="category-badge">Gerçek Zamanlı Üretim</span>
+                        <p>Krea.ai, basit çizimleri saniyeler içinde yüksek moda görsellerine dönüştürür. Ekranın solunda çizim yaparken, sağ tarafta yapay zekanın oluşturduğu sonucu anlık görebilirsiniz.</p>
+                        <ul style="margin-top: 15px; margin-left: 20px; line-height: 1.6;">
+                            <li><strong>Sol Taraf:</strong> Sizin çizim yapacağınız beyaz tahta (Canvas).</li>
+                            <li><strong>Sağ Taraf:</strong> Yapay zekanın anlık oluşturduğu gerçekçi görüntü.</li>
+                            <li><strong>Kayıt:</strong> Beğendiğiniz sonucu sağ üstteki indirme butonuyla kaydedebilirsiniz.</li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+            
+            <div id="fabrics" class="section">
+                <h2 style="color: #0f2027; margin-bottom: 20px;">🧵 Moda Tasarımcıları İçin Kritik İpucu</h2>
+                <p>Yapay zekaya komut verirken <strong>kumaş bilgisini</strong> mutlaka ekleyin. Sonucun kalitesini ve dokusunu en çok bu detay etkiler.</p>
+                <div class="fabric-list">
+                    <div class="fabric-item">Silk (İpek)</div>
+                    <div class="fabric-item">Velvet (Kadife)</div>
+                    <div class="fabric-item">Leather (Deri)</div>
+                    <div class="fabric-item">Denim (Kot)</div>
+                    <div class="fabric-item">Chiffon (Şifon)</div>
+                    <div class="fabric-item">Lace (Dantel)</div>
+                </div>
+                <div class="workflow-box" style="margin-top: 30px; background: #fff3e0; border-left-color: #ff9800;">
+                    <p><strong>Örnek Komut:</strong> "A high fashion red evening dress, <strong>silk texture</strong>, cinematic lighting, futuristic design."</p>
+                </div>
+            </div>
+            
+            <div id="summary" class="section">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aşama</th>
+                            <th>Açıklama</th>
+                            <th>Araç/Yöntem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Giriş</strong></td>
+                            <td>Siteye Google ile hızlı kayıt olun.</td>
+                            <td>Krea.ai</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mod Seçimi</strong></td>
+                            <td>Gerçek zamanlı üretim moduna geçin.</td>
+                            <td>Real-time Generation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Etkileşim</strong></td>
+                            <td>Çizim yaparken prompt ile yönlendirin.</td>
+                            <td>Fırça + Metin Kutusu</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Doku Kalitesi</strong></td>
+                            <td>Kumaş türlerini belirterek detaylandırın.</td>
+                            <td>Silk, Velvet, Leather vb.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Final</strong></td>
+                            <td>Beğendiğiniz kareyi anında indirin.</td>
+                            <td>Download Butonu</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            const pills = document.querySelectorAll('.nav-pill');
+            pills.forEach(pill => pill.classList.remove('active'));
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>

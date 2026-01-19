@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moda Tasarımı ve YZ Prompt Mühendisliği Eğitim Portalı</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a1a2e;
+            --accent-color: #3d5af1;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-main: #2d3436;
+            --text-light: #636e72;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #16213e);
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        header p {
+            font-weight: 300;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: -3rem auto 3rem;
+            padding: 0 1.5rem;
+            display: grid;
+            gap: 2.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .card-content {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-title {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1rem;
+        }
+
+        .card-text {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-text ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .card-text li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .card-text li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        .image-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            min-height: 300px;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .image-wrapper:hover img {
+            filter: brightness(0.6) scale(1.05);
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: 600;
+            opacity: 0;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            width: 80%;
+        }
+
+        .image-wrapper:hover .image-overlay {
+            opacity: 1;
+        }
+
+        .caption {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            font-style: italic;
+            margin-top: 1rem;
+            line-height: 1.4;
+            padding: 0.5rem;
+            background: #f1f2f6;
+            border-radius: 5px;
+        }
+
+        .formula-box {
+            background: #f0f3ff;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin: 1rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: auto;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        footer {
+            background: #f1f2f6;
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 850px) {
+            .card {
+                grid-template-columns: 1fr;
+            }
+            header h1 { font-size: 1.8rem; }
+            .card-content { order: 2; }
+            .image-wrapper { order: 1; min-height: 250px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Moda Tasarımı ve YZ Eğitim Paneli</h1>
+        <p>Eskizden dijital sanata, 3D simülasyondan podyum yürüyüşüne kadar moda teknolojileri rehberi.</p>
+    </header>
+
+    <main>
+        <section class="card">
+            <div class="card-content">
+                <h2 class="card-title">Moda tasarımında Artistik Çizim</h2>
+                <div class="card-text">
+                    Tasarımcının kafasındaki giysi fikrini, duygusunu ve tarzını dijital ekrana döktüğü estetik odaklı çizim türüdür[cite: 1].
+                    <ul>
+                        <li><strong>Eskiz:</strong> Hızlı, dağınık ilk notlar[cite: 2].</li>
+                        <li><strong>Artistik Çizim:</strong> Sunuma hazır final hali[cite: 3].</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="image-wrapper" onclick="window.open('https://www.midjourney.com', '_blank')">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80" alt="Artistik Çizim">
+                <div class="image-overlay">Midjourney Sitesine Git ↗</div>
+                <p class="caption">Eskizin temize çekilmiş, renklendirilmiş, yüz, saç ve makyaj detayları eklenmiş, sunuma hazır final halidir. [cite: 3]</p>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-content">
+                <h2 class="card-title">"Prompt" (Komut) Yazılacağına Dair Kısa Bir Rehber</h2>
+                <div class="card-text">
+                    Verimli sonuçlar için profesyonel bir "prompt" (komut) seti oluşturma formülü[cite: 4, 11]:
+                    <div class="formula-box">[Ana Özne] + [Stil/Dönem] + [Kumaş] + [Renk] + [Teknik]</div>
+                    Negatif prompt kullanarak istenmeyen detayları engelleyebilirsiniz.
+                </div>
+            </div>
+            <div class="image-wrapper" onclick="window.open('https://www.dalle.com', '_blank')">
+                <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=800&q=80" alt="Prompt Engineering">
+                <div class="image-overlay">DALL-E Sitesine Git ↗</div>
+                <p class="caption">Bu promptu bir prompt engineer gibi düşünerek, sorumun türüne göre en verimli prompt tekniğini kullanarak geliştir. [cite: 4]</p>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-content">
+                <h2 class="card-title">3D Giydirme ve Kumaş Simülasyonu Araçları</h2>
+                <div class="card-text">
+                    Dijital kumaşın hareketini fizik kurallarına uygun simüle eden standart yazılımlar[cite: 34]:
+                    <ul>
+                        <li><strong>CLO 3D:</strong> Endüstri standardı, hazır podyum sahneleri sunar.</li>
+                        <li><strong>Style3D:</strong> YZ entegrasyonu odaklı rakip[cite: 36].</li>
+                        <li><strong>Marvelous Designer:</strong> Oyun ve film giysi tasarımı[cite: 38].</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="image-wrapper" onclick="window.open('https://www.clo3d.com', '_blank')">
+                <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?auto=format&fit=crop&w=800&q=80" alt="3D Simulation">
+                <div class="image-overlay">CLO 3D Sitesine Git ↗</div>
+                <p class="caption">Bu araçlar, dijital kumaşın ağırlığını, dokusunu ve vücut üzerindeki hareketini fizik kurallarına uygun şekilde simüle eder. [cite: 34]</p>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-content">
+                <h2 class="card-title">Avatar Oluşturma ve Özelleştirme</h2>
+                <div class="card-text">
+                    Kendi 3D dijital kimliğinizi oluşturmak için en pratik yöntemler[cite: 63, 77]:
+                    <ul>
+                        <li><strong>Ready Player Me:</strong> Hızlı ve özelleştirilebilir avatarlar[cite: 77].</li>
+                        <li><strong>Avaturn:</strong> Selfie üzerinden fotorealistik modeller[cite: 78].</li>
+                        <li><strong>MetaHuman:</strong> Sinematik gerçeklik[cite: 79].</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="image-wrapper" onclick="window.open('https://readyplayer.me', '_blank')">
+                <img src="https://images.unsplash.com/photo-1614728263952-84ea206f2c40?auto=format&fit=crop&w=800&q=80" alt="Ready Player Me">
+                <div class="image-overlay">Ready Player Me ↗</div>
+                <p class="caption">Kendi 3D avatarını oluşturup kişiselleştirebileceğin bir platform. [cite: 87]</p>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-content">
+                <h2 class="card-title">Sanal Podyum ve Yürüyüş Simülasyonu</h2>
+                <div class="card-text">
+                    Avatarın podyumda doğal yürümesi için hareket verisi (MoCap) gereklidir[cite: 94].
+                    <ul>
+                        <li><strong>Mixamo:</strong> Ücretsiz catwalk animasyonları[cite: 97].</li>
+                        <li><strong>DeepMotion:</strong> Videodan AI ile 3D hareket üretme[cite: 95].</li>
+                        <li><strong>Move.ai:</strong> İşaretçisiz yüksek doğrulukta yakalama[cite: 96].</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="image-wrapper" onclick="window.open('https://www.mixamo.com', '_blank')">
+                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80" alt="Catwalk">
+                <div class="image-overlay">Mixamo Sitesine Git ↗</div>
+                <p class="caption">Mixamo (Adobe): Avatarlar için hazır animasyonlar sunan ücretsiz bir kütüphanedir. </p>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-content">
+                <h2 class="card-title">Karalama Çizimden Gerçekçi Tasarıma (Krea.ai)</h2>
+                <div class="card-text">
+                    Basit eskizleri saniyeler içinde profesyonel moda görsellerine dönüştürme yöntemi[cite: 147].
+                    Siz çizdikçe yapay zeka gerçek zamanlı olarak görüntüyü geliştirir.
+                </div>
+            </div>
+            <div class="image-wrapper" onclick="window.open('https://www.krea.ai', '_blank')">
+                <img src="https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&w=800&q=80" alt="Krea AI">
+                <div class="image-overlay">Krea.ai Sitesine Git ↗</div>
+                <p class="caption">Bu yöntem, elinizle çizdiğiniz basit çöp adam seviyesindeki taslakları podyum kalitesine dönüştürür. [cite: 147]</p>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-content">
+                <h2 class="card-title">Sanal Giysi Deneme & Try-On Araçları</h2>
+                <div class="card-text">
+                    Ürün resimlerini AI ile model üzerinde görselleştirme teknolojileri[cite: 101]:
+                    <ul>
+                        <li><strong>Outfit Anyone:</strong> Ultra yüksek kaliteli sanal deneme[cite: 40].</li>
+                        <li><strong>OOTDiffusion:</strong> Kıyafeti vücuda başarılı bir şekilde oturtma[cite: 38].</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="image-wrapper" onclick="window.open('https://www.outfitanyone.life', '_blank')">
+                <img src="https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?auto=format&fit=crop&w=800&q=80" alt="Try-On">
+                <div class="image-overlay">Outfit Anyone ↗</div>
+                <p class="caption">Herhangi bir kıyafet ve herhangi bir kişi için ultra yüksek kaliteli sanal deneme uygulaması. [cite: 40]</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Akademik Kullanım Notu: Bu içerik Moda Tasarımında Yapay Zeka kullanımı üzerine hazırlanan eğitim materyallerini temel alır[cite: 144].</p>
+        <p>© 2024 AI Fashion-Tech Danışmanlığı - Akademik Sunum Kaynağı</p>
+    </footer>
+
+    <script>
+        // Kartlara etkileşimli tıklama geri bildirimi
+        document.querySelectorAll('.image-wrapper').forEach(wrapper => {
+            wrapper.addEventListener('mousedown', function() {
+                this.style.transform = 'scale(0.98)';
+            });
+            wrapper.addEventListener('mouseup', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
