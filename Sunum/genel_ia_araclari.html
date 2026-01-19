@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 Yapay Zeka Alet Çantası</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); /* Mavi/Turkuaz tonları */
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); /* Koyu Mavi/Gri */
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .nav-pills {
+            display: flex;
+            gap: 15px;
+            padding: 30px 40px;
+            background: #f8f9fa;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-pill {
+            padding: 15px 30px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .nav-pill:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(44, 83, 100, 0.3);
+        }
+        
+        .nav-pill.active {
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tool-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid #0f2027;
+            transition: all 0.3s;
+        }
+        
+        .tool-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 30px rgba(15, 32, 39, 0.2);
+        }
+        
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 4px 10px rgba(15, 32, 39, 0.3);
+        }
+        
+        .tool-title {
+            font-size: 1.8em;
+            color: #0f2027;
+            font-weight: 700;
+        }
+        
+        .tool-description {
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .feature-list {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
+        .feature-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: start;
+            gap: 12px;
+        }
+        
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-icon {
+            color: #0f2027;
+            font-size: 20px;
+            margin-top: 2px;
+        }
+        
+        .link-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(15, 32, 39, 0.3);
+            margin: 10px 10px 10px 0;
+        }
+        
+        .link-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(15, 32, 39, 0.4);
+        }
+        
+        .category-badge {
+            display: inline-block;
+            padding: 6px 15px;
+            background: #2c5364;
+            color: white;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 5px 5px 5px 0;
+        }
+
+        .tip-box {
+            background: #e8f4f8;
+            border-left: 5px solid #2980b9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .tip-title {
+            color: #2980b9;
+            font-weight: 700;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #0f2027;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:hover {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧰 2026 Yapay Zeka Alet Çantası</h1>
+            <p class="subtitle">Verimlilik, Tasarım ve Üretkenlik için En İyi Araçlar</p>
+        </header>
+        
+        <div class="nav-pills">
+            <div class="nav-pill active" onclick="showSection('generative')">🤖 Üretken Yapay Zeka</div>
+            <div class="nav-pill" onclick="showSection('utilities')">🛠️ Pratik Araçlar</div>
+            <div class="nav-pill" onclick="showSection('design')">🎨 Tasarım & Yaşam</div>
+            <div class="nav-pill" onclick="showSection('dev')">💻 Geliştirici & Platform</div>
+            <div class="nav-pill" onclick="showSection('summary')">📊 Özet Tablo</div>
+        </div>
+        
+        <div class="content">
+            <div id="generative" class="section active">
+                <h2 style="font-size: 2.2em; color: #0f2027; margin-bottom: 30px;">Chatbot ve Animasyon Araçları</h2>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">💬</div>
+                        <div class="tool-title">Chathub</div>
+                    </div>
+                    <div class="category-badge">All-in-One</div>
+                    <div class="category-badge">Erişim</div>
+                    <div class="tool-description">
+                        [cite_start]Birden fazla yapay zeka modelini tek bir arayüzde toplayan platform. [cite: 101] Tüm yapay zeka araçlarına tek bir siteden ulaşmanızı sağlar.
+                    </div>
+                    <a href="https://app.chathub.gg" target="_blank" class="link-button">🔗 Chathub'a Git</a>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🎭</div>
+                        <div class="tool-title">Wan 2.2 Animate</div>
+                    </div>
+                    <div class="category-badge">Ücretsiz</div>
+                    <div class="category-badge">Karakter Animasyonu</div>
+                    <div class="tool-description">
+                        [cite_start][cite: 110] Gelişmiş yapay zeka destekli animasyonlar, hassas yüz ifadeleri ve dinamik vücut hareketleriyle karakterleri dönüştürür.
+                    </div>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">⚡</span>
+                            [cite_start]<span>[cite: 111] Kayıt olmadan çevrimiçi deneyimleme imkanı.</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">📥</span>
+                            [cite_start]<span>[cite: 111] İsterseniz Hugging Face üzerinden indirip sınırsız üretim yapabilirsiniz.</span>
+                        </div>
+                    </div>
+                    <a href="#" target="_blank" class="link-button">🔗 Wan Animate</a>
+                </div>
+            </div>
+            
+            <div id="utilities" class="section">
+                <h2 style="font-size: 2.2em; color: #0f2027; margin-bottom: 30px;">Zaman Kazandıran Pratik Araçlar</h2>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🚀</div>
+                        <div class="tool-title">TinyWow</div>
+                    </div>
+                    <div class="category-badge">Bulut Tabanlı</div>
+                    <div class="category-badge">Ücretsiz</div>
+                    <div class="tool-description">
+                        [cite_start][cite: 114] PDF düzenleme, video kırpma, altyazı ekleme ve dosya küçültme gibi işlemleri saniyeler içinde yapan araç.
+                    </div>
+                    <div class="tip-box">
+                        <div class="tip-title">💡 Avantajı</div>
+                        [cite_start]<div>[cite: 115] Program indirmek gerekmez, tamamen ücretsiz ve hızlıdır.</div>
+                    </div>
+                    <a href="https://tinywow.com" target="_blank" class="link-button">🔗 TinyWow</a>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">📂</div>
+                        <div class="tool-title">SwissTransfer</div>
+                    </div>
+                    <div class="category-badge">Dosya Paylaşımı</div>
+                    <div class="category-badge">50 GB</div>
+                    <div class="tool-description">
+                        [cite_start][cite: 119] WeTransfer alternatifi olarak 50 GB’a kadar dosya gönderimi yapabilen servis.
+                    </div>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">🔒</span>
+                            [cite_start]<span>[cite: 119] Kayıt olmaya gerek yoktur.</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">📅</span>
+                            [cite_start]<span>[cite: 119] Dosyalarınız 30 gün boyunca saklanır.</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🎥</span>
+                            [cite_start]<span>[cite: 120] Büyük videoları paylaşmak için idealdir.</span>
+                        </div>
+                    </div>
+                    <a href="https://swisstransfer.com" target="_blank" class="link-button">🔗 SwissTransfer</a>
+                </div>
+            </div>
+            
+            <div id="design" class="section">
+                <h2 style="font-size: 2.2em; color: #0f2027; margin-bottom: 30px;">Tasarım, Yaşam ve Keşif</h2>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🏠</div>
+                        <div class="tool-title">Plan Your Room</div>
+                    </div>
+                    <div class="category-badge">Dekorasyon</div>
+                    <div class="tool-description">
+                        [cite_start][cite: 106] Evinizi dekore etmeden önce odalarınızı milimetrik planlayıp eşyaların nasıl duracağını görebileceğiniz araç.
+                    </div>
+                    <a href="https://planyourroom.com" target="_blank" class="link-button">🔗 Plan Your Room</a>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🗺️</div>
+                        <div class="tool-title">Old Maps Online</div>
+                    </div>
+                    <div class="category-badge">Tarih</div>
+                    <div class="category-badge">Harita</div>
+                    <div class="tool-description">
+                        [cite_start][cite: 104] Dünyanın istediğiniz yerinin yüzyıllar önceki haritalarına bakıp zamanda yolculuk yapmanızı sağlar.
+                    </div>
+                    <a href="https://oldmapsonline.org" target="_blank" class="link-button">🔗 Old Maps Online</a>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🛍️</div>
+                        <div class="tool-title">Alışveriş Asistanları</div>
+                    </div>
+                    <div class="category-badge">ChatGPT</div>
+                    <div class="category-badge">Gemini</div>
+                    <div class="tool-description">
+                        [cite_start][cite: 107, 108] ChatGPT ve Gemini üzerinden "Alışveriş araştırması" özelliğini kullanarak akıllı alışveriş listeleri ve ürün karşılaştırmaları yapabilirsiniz.
+                    </div>
+                </div>
+            </div>
+            
+            <div id="dev" class="section">
+                <h2 style="font-size: 2.2em; color: #0f2027; margin-bottom: 30px;">Geliştirici ve Model Platformları</h2>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🤗</div>
+                        <div class="tool-title">Hugging Face</div>
+                    </div>
+                    <div class="category-badge">Açık Kaynak</div>
+                    <div class="category-badge">AI Modelleri</div>
+                    <div class="tool-description">
+                        [cite_start][cite: 117] Yapay zekâ modellerini barındıran dev bir platform. Topluluk tarafından sürekli geliştirilen modellere ev sahipliği yapar.
+                    </div>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">📝</span>
+                            [cite_start]<span>[cite: 117] Videoyu yazıya dökmek için idealdir.</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🔍</span>
+                            [cite_start]<span>[cite: 117] Ses tanıma, yüz algılama ve otomatik özetleme araçları mevcuttur.</span>
+                        </div>
+                    </div>
+                    <a href="https://huggingface.co" target="_blank" class="link-button">🔗 Hugging Face</a>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🖼️</div>
+                        <div class="tool-title">SEO Studio Tools</div>
+                    </div>
+                    <div class="category-badge">Görüntü İşleme</div>
+                    <div class="tool-description">
+                        [cite_start][cite: 102] Görüntü dönüştürme, boyutlandırma ve düzenleme gibi çeşitli web tabanlı araçlar sunar.
+                    </div>
+                    <a href="https://seostudio.tools" target="_blank" class="link-button">🔗 SEO Studio</a>
+                </div>
+            </div>
+            
+            <div id="summary" class="section">
+                <div class="workflow-section">
+                    <div class="workflow-title">🏆 Hızlı Bakış Tablosu</div>
+                    <p style="text-align: center; font-size: 1.1em; color: #666; margin-bottom: 30px;">
+                        İhtiyacınıza en uygun aracı seçin
+                    </p>
+                    
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Kategori</th>
+                                <th>Araç İsmi</th>
+                                <th>Ana Özellik</th>
+                                <th>Önemli Detay</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>🎬 Animasyon</td>
+                                <td>Wan 2.2 Animate</td>
+                                <td>Karakter Animasyonu</td>
+                                [cite_start]<td>Kayıtsız kullanım [cite: 111]</td>
+                            </tr>
+                            <tr>
+                                <td>🛠️ Yardımcı</td>
+                                <td>TinyWow</td>
+                                <td>PDF & Medya Düzenleme</td>
+                                [cite_start]<td>İndirme gerektirmez [cite: 115]</td>
+                            </tr>
+                            <tr>
+                                <td>📨 Transfer</td>
+                                <td>SwissTransfer</td>
+                                <td>Büyük Dosya Gönderimi</td>
+                                [cite_start]<td>50 GB limit [cite: 119]</td>
+                            </tr>
+                            <tr>
+                                <td>🤖 AI Platform</td>
+                                <td>Chathub</td>
+                                <td>Hepsi Bir Arada</td>
+                                [cite_start]<td>Tek siteden erişim [cite: 101]</td>
+                            </tr>
+                            <tr>
+                                <td>🧠 Model Depo</td>
+                                <td>Hugging Face</td>
+                                <td>AI Modelleri & Transkript</td>
+                                [cite_start]<td>Dev kütüphane [cite: 117]</td>
+                            </tr>
+                            <tr>
+                                <td>🏠 Dekorasyon</td>
+                                <td>Plan Your Room</td>
+                                <td>Oda Planlama</td>
+                                [cite_start]<td>Milimetrik çizim [cite: 106]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            // Tüm sectionları gizle
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Tüm butonların aktifliğini kaldır
+            const pills = document.querySelectorAll('.nav-pill');
+            pills.forEach(pill => pill.classList.remove('active'));
+            
+            // Seçilen section'ı göster
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Tıklanan butonu aktif yap
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
