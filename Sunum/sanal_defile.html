@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanal Defile Hazırlama Rehberi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%); /* Mor/Mavi tonları */
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #240b36 0%, #c31432 100%); /* Koyu kırmızı/mor */
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .nav-pills {
+            display: flex;
+            gap: 15px;
+            padding: 30px 40px;
+            background: #f8f9fa;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-pill {
+            padding: 15px 30px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .nav-pill:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(74, 0, 224, 0.3);
+        }
+        
+        .nav-pill.active {
+            background: linear-gradient(135deg, #c31432 0%, #240b36 100%);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tool-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid #c31432;
+            transition: all 0.3s;
+        }
+        
+        .tool-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 30px rgba(195, 20, 50, 0.2);
+        }
+        
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #c31432 0%, #240b36 100%);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 4px 10px rgba(195, 20, 50, 0.3);
+        }
+        
+        .tool-title {
+            font-size: 1.8em;
+            color: #240b36;
+            font-weight: 700;
+        }
+        
+        .tool-description {
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .feature-list {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
+        .feature-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: start;
+            gap: 12px;
+        }
+        
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-icon {
+            color: #c31432;
+            font-size: 20px;
+            margin-top: 2px;
+        }
+        
+        .link-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #c31432 0%, #240b36 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(195, 20, 50, 0.3);
+            margin: 10px 10px 10px 0;
+        }
+        
+        .link-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(195, 20, 50, 0.4);
+        }
+        
+        .category-badge {
+            display: inline-block;
+            padding: 6px 15px;
+            background: #240b36;
+            color: white;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 5px 5px 5px 0;
+        }
+        
+        .workflow-section {
+            background: linear-gradient(135deg, #fff0f3 0%, #ffe4e6 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 30px 0;
+        }
+        
+        .workflow-title {
+            text-align: center;
+            font-size: 2em;
+            color: #240b36;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        
+        .workflow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+        
+        .workflow-step {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .workflow-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(195, 20, 50, 0.2);
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #c31432 0%, #240b36 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 15px;
+        }
+        
+        .step-title {
+            font-size: 1.3em;
+            color: #240b36;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .tip-box {
+            background: #fff9e6;
+            border-left: 5px solid #f39c12;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .tip-title {
+            color: #f39c12;
+            font-weight: 700;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .prompt-box {
+            background: #2d2d2d;
+            color: #00ff00;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            margin-top: 15px;
+            border: 1px solid #444;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #240b36;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:hover {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✨ Sanal Defile Yapma Rehberi</h1>
+            <p class="subtitle">Avatar Oluşturma, Kıyafet Tasarımı ve Podyum Animasyonu için Kapsamlı Araçlar</p>
+        </header>
+        
+        <div class="nav-pills">
+            <div class="nav-pill active" onclick="showSection('avatar')">👤 1. Avatar Oluşturma</div>
+            <div class="nav-pill" onclick="showSection('clothes')">👗 2. Kıyafet & Tasarım</div>
+            <div class="nav-pill" onclick="showSection('walk')">🚶 3. Yürüyüş & Podyum</div>
+            <div class="nav-pill" onclick="showSection('render')">🎬 4. Render & Sahne</div>
+            <div class="nav-pill" onclick="showSection('workflow')">🔄 Önerilen İş Akışı</div>
+        </div>
+        
+        <div class="content">
+            <div id="avatar" class="section active">
+                <h2 style="font-size: 2.2em; color: #240b36; margin-bottom: 30px;">Karakter ve Avatar Oluşturma</h2>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">📸</div>
+                        <div class="tool-title">Avaturn</div>
+                    </div>
+                    <div class="category-badge">Ücretsiz</div>
+                    <div class="category-badge">Selfie Tabanlı</div>
+                    <div class="tool-description">
+                        Kendi yüzünüzle fotorealistik bir avatar oluşturun. [cite_start]Bir selfie yükleyerek kendinize benzeyen bir 3D model yaratabilirsiniz. [cite: 2, 34]
+                    </div>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">✨</span>
+                            <span>Selfie'den gerçekçi 3D model üretimi</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">👕</span>
+                            <span>Kıyafet değiştirme ve özelleştirme imkanı</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">📂</span>
+                            <span>Blender ve Unity için dosya çıktısı alma</span>
+                        </div>
+                    </div>
+                    <a href="https://avaturn.me" target="_blank" class="link-button">🔗 Avaturn'e Git</a>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🎮</div>
+                        <div class="tool-title">Ready Player Me</div>
+                    </div>
+                    <div class="category-badge">Web Tabanlı</div>
+                    <div class="category-badge">Kolay</div>
+                    <div class="tool-description">
+                        [cite_start]Hızlıca özelleştirilebilir, binlerce kıyafet seçeneği (markalar dahil) sunan ve oyun motorlarına kolayca entegre edilen avatar platformu. [cite: 18, 21]
+                    </div>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">🌐</span>
+                            <span>Web üzerinden kurulum gerektirmeden çalışır</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">📥</span>
+                            <span>.glb formatında indirip Blender/Unity'de kullanım</span>
+                        </div>
+                    </div>
+                    <a href="https://readyplayer.me" target="_blank" class="link-button">🔗 Ready Player Me</a>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🤖</div>
+                        <div class="tool-title">MetaHuman Creator</div>
+                    </div>
+                    <div class="category-badge">Profesyonel</div>
+                    <div class="category-badge">Unreal Engine</div>
+                    <div class="tool-description">
+                        [cite_start]Unreal Engine için yapay zeka destekli, sinematik kalitede ve aşırı gerçekçi insan modelleri oluşturmak için kullanılır. [cite: 35]
+                    </div>
+                </div>
+            </div>
+            
+            <div id="clothes" class="section">
+                <h2 style="font-size: 2.2em; color: #240b36; margin-bottom: 30px;">3D Kıyafet Tasarımı ve Giydirme</h2>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🧵</div>
+                        <div class="tool-title">Style3D / Atelier</div>
+                    </div>
+                    <div class="category-badge">Yapay Zeka Destekli</div>
+                    <div class="category-badge">Başlangıç Dostu</div>
+                    <div class="tool-description">
+                        Genellikle yeni başlayanlar için ideal, yapay zeka destekli dikim özellikleri sunan araç. [cite_start]30 günlük tam özellikli deneme sürümü veya temel ücretsiz planlar sunabilir. [cite: 4, 37]
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🧥</div>
+                        <div class="tool-title">Meshy.ai</div>
+                    </div>
+                    <div class="category-badge">2D'den 3D'ye</div>
+                    <div class="category-badge">AI Prompt</div>
+                    <div class="tool-description">
+                        [cite_start]"A futuristic jacket" gibi bir metin yazarak veya çizdiğiniz bir eskizi yükleyerek onu saniyeler içinde 3D modele dönüştürür. [cite: 25, 26]
+                    </div>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">📝</span>
+                            <span>Text-to-3D: Metinden model oluşturma</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🎨</span>
+                            <span>Image-to-3D: Eskizden model oluşturma</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">⚠️</span>
+                            <span>Kıyafeti avatar üzerine giydirmek için Blender gerekir</span>
+                        </div>
+                    </div>
+                    <a href="https://meshy.ai" target="_blank" class="link-button">🔗 Meshy.ai</a>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">✂️</div>
+                        <div class="tool-title">CLO 3D</div>
+                    </div>
+                    <div class="category-badge">Profesyonel</div>
+                    <div class="tool-description">
+                        Gerçekçi kumaş fiziği ve dikim simülasyonu için endüstri standardı. [cite_start]Profesyonel iş akışlarında Avaturn ile oluşturulan modele kıyafet giydirmek için kullanılır. [cite: 37]
+                    </div>
+                </div>
+            </div>
+            
+            <div id="walk" class="section">
+                <h2 style="font-size: 2.2em; color: #240b36; margin-bottom: 30px;">Podyum Yürüyüşü ve Animasyon</h2>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">💃</div>
+                        <div class="tool-title">Adobe Mixamo</div>
+                    </div>
+                    <div class="category-badge">Ücretsiz</div>
+                    <div class="category-badge">Kütüphane</div>
+                    <div class="tool-description">
+                        Avatarınıza podyum yürüyüşü (catwalk) eklemek için en pratik araç. [cite_start]Hazır animasyonları avatarınıza tek tıkla uygular. [cite: 3, 78]
+                    </div>
+                    <div class="tip-box">
+                        <div class="tip-title">💡 İpucu</div>
+                        <div>Arama çubuğuna "Catwalk" yazarak profesyonel podyum yürüyüşlerini bulabilirsiniz.</div>
+                    </div>
+                    <a href="https://www.mixamo.com" target="_blank" class="link-button">🔗 Mixamo'ya Git</a>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">📹</div>
+                        <div class="tool-title">DeepMotion</div>
+                    </div>
+                    <div class="category-badge">Video Analizi</div>
+                    <div class="category-badge">AI</div>
+                    <div class="tool-description">
+                        Telefonla çektiğiniz bir yürüyüş videosunu yapay zeka ile analiz ederek 3D animasyon verisine dönüştürür. [cite_start]Özgün bir yürüyüş stili için idealdir. [cite: 75]
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🎞️</div>
+                        <div class="tool-title">AI Video Üretimi (Prompt)</div>
+                    </div>
+                    <div class="tool-description">
+                        [cite_start]Eğer 3D modelleme yerine doğrudan yapay zeka ile podyum videosu üretmek isterseniz (Runway, Pika, Stable Diffusion), şu profesyonel promptu kullanın: [cite: 79]
+                    </div>
+                    <div class="prompt-box">
+                        "Create a virtual fashion runway scene. A 3D female model walking confidently on a catwalk, wearing modern fashion clothing, studio lighting, cinematic camera angle, smooth walking animation, fashion show atmosphere."
+                    </div>
+                </div>
+            </div>
+            
+            <div id="render" class="section">
+                <h2 style="font-size: 2.2em; color: #240b36; margin-bottom: 30px;">Render ve Sahneleme</h2>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🎥</div>
+                        <div class="tool-title">Unreal Engine 5</div>
+                    </div>
+                    <div class="category-badge">Profesyonel</div>
+                    <div class="category-badge">Ücretsiz İndirme</div>
+                    <div class="tool-description">
+                         Profesyonel ışıklandırma ile defilenizi kaydetmek ve sinematik atmosfer yaratmak için en güçlü araç. [cite_start]Final defile genellikle burada gerçekleştirilir. [cite: 6, 37]
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🟧</div>
+                        <div class="tool-title">Blender</div>
+                    </div>
+                    <div class="category-badge">Açık Kaynak</div>
+                    <div class="category-badge">Ücretsiz</div>
+                    <div class="tool-description">
+                        [cite_start]Avatarın üzerine basit kumaşlar ekleyip simüle etmek veya Meshy.ai'den alınan kıyafetleri avatar üzerine giydirmek için kullanılır. [cite: 5, 27]
+                    </div>
+                </div>
+            </div>
+            
+            <div id="workflow" class="section">
+                <div class="workflow-section">
+                    <div class="workflow-title">🚀 Önerilen Sanal Defile İş Akışı</div>
+                    <p style="text-align: center; font-size: 1.1em; color: #666; margin-bottom: 30px;">
+                        [cite_start][cite: 37] kaynağından derlenen profesyonel iş akışı
+                    </p>
+                    
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-title">Avatar (Avaturn)</div>
+                            <div class="step-description">Selfie yükle ve gerçekçi 3D modelini oluştur.</div>
+                        </div>
+                        
+                        <div class="workflow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-title">Kıyafet (CLO 3D / Style3D)</div>
+                            <div class="step-description">Kıyafetini tasarla ve avatar üzerine giydir.</div>
+                        </div>
+                        
+                        <div class="workflow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-title">Yürüyüş (DeepMotion / Mixamo)</div>
+                            <div class="step-description">Podyum yürüyüşü animasyonunu ekle.</div>
+                        </div>
+                        
+                        <div class="workflow-step">
+                            <div class="step-number">4</div>
+                            <div class="step-title">Sahne (Unreal Engine)</div>
+                            <div class="step-description">Işıklandırma yap ve final defileyi kaydet.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 style="color: #240b36; margin-top: 40px; margin-bottom: 20px;">📊 Araç Karşılaştırma Tablosu</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Adım</th>
+                            <th>İşlem</th>
+                            <th>Önerilen Araçlar</th>
+                            <th>Maliyet</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1. Avatar</td>
+                            <td>Karakter Yaratma</td>
+                            <td>Avaturn, Ready Player Me</td>
+                            <td>✅ Ücretsiz Seçenekler Var</td>
+                        </tr>
+                        <tr>
+                            <td>2. Kıyafet</td>
+                            <td>Moda Tasarımı</td>
+                            <td>Style3D, CLO 3D, Meshy</td>
+                            <td>💰 Genelde Ücretli / Freemium</td>
+                        </tr>
+                        <tr>
+                            <td>3. Animasyon</td>
+                            <td>Podyum Yürüyüşü</td>
+                            <td>Mixamo (Hazır), DeepMotion (Video'dan)</td>
+                            <td>✅ Mixamo Ücretsiz</td>
+                        </tr>
+                        <tr>
+                            <td>4. Render</td>
+                            <td>Sahne & Kayıt</td>
+                            <td>Unreal Engine, Blender</td>
+                            <td>✅ Ücretsiz İndirilebilir</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            // Tüm sectionları gizle
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Tüm butonların aktifliğini kaldır
+            const pills = document.querySelectorAll('.nav-pill');
+            pills.forEach(pill => pill.classList.remove('active'));
+            
+            // Seçilen section'ı göster
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Tıklanan butonu aktif yap
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
