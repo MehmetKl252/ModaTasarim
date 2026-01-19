@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Modelleme Rehberi: Eskizden 3B Dünyaya</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .nav-pills {
+            display: flex;
+            gap: 15px;
+            padding: 30px 40px;
+            background: #f8f9fa;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-pill {
+            padding: 15px 30px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .nav-pill:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(44, 83, 100, 0.3);
+        }
+        
+        .nav-pill.active {
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Tıklanabilir Kart Stili */
+        .tool-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            margin-bottom: 25px;
+        }
+
+        .tool-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid #0f2027;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .tool-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(15, 32, 39, 0.2);
+            border-left-width: 10px;
+        }
+        
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .tool-icon {
+            width: 50px;
+            height: 50px;
+            background: #0f2027;
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .tool-title {
+            font-size: 1.6em;
+            color: #0f2027;
+            font-weight: 700;
+        }
+        
+        .category-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #e1f5fe;
+            color: #0288d1;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .workflow-box {
+            background: #f1f8e9;
+            border-left: 5px solid #689f38;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #0f2027;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧊 3D Modelleme Rehberi</h1>
+            <p class="subtitle">Eskizden Gerçekçi 3B Modellere Uzanan Yapay Zeka Destekli Yolculuk</p>
+        </header>
+        
+        <div class="nav-pills">
+            <div class="nav-pill active" onclick="showSection('how-to')">📋 Nasıl Kullanılır?</div>
+            <div class="nav-pill" onclick="showSection('tools')">🛠️ Popüler Araçlar</div>
+            <div class="nav-pill" onclick="showSection('advanced')">💻 Profesyonel Çözümler</div>
+            <div class="nav-pill" onclick="showSection('summary')">📊 Özet Tablo</div>
+        </div>
+        
+        <div class="content">
+            <div id="how-to" class="section active">
+                <div class="workflow-box">
+                    <h2 style="color: #33691e; margin-bottom: 15px;">🚀 4 Adımda 3D Modelleme Süreci</h2>
+                    <ol style="margin-left: 20px; line-height: 1.8;">
+                        [cite_start]<li><strong>Eskizinizi Hazırlayın:</strong> [cite: 20] El çiziminizin veya dijital taslağınızın net bir fotoğrafını çekin.</li>
+                        [cite_start]<li><strong>Platforma Yükleyin:</strong> [cite: 21] "Image to 3D" veya "Sketch to 3D" butonunu kullanarak görseli yükleyin.</li>
+                        [cite_start]<li><strong>İşleme (Generate):</strong> [cite: 22] Yapay zeka görseli analiz ederken bekleyin.</li>
+                        [cite_start]<li><strong>İndirin ve Kullanın:</strong> [cite: 24] Modeli inceleyip OBJ, GLB veya FBX formatlarında bilgisayarınıza indirin.</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div id="tools" class="section">
+                <a href="https://www.meshy.ai" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-icon">🪄</div>
+                            <div class="tool-title">Meshy AI</div>
+                        </div>
+                        <span class="category-badge">En Profesyonel Web Deneyimi</span>
+                        [cite_start]<p>[cite: 26, 28] Eskiz ve fotoğraflardan çok hızlı, yüksek kaliteli 3D modeller ve dokular üreten profesyonel web aracıdır.</p>
+                    </div>
+                </a>
+
+                <a href="https://www.tripo3d.ai" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-icon">⚡</div>
+                            <div class="tool-title">Tripo AI</div>
+                        </div>
+                        <span class="category-badge">Hız Odaklı</span>
+                        [cite_start]<p>[cite: 31, 32] "Image to 3D" özelliği ile eskizleri saniyeler içinde 3D objelere dönüştürür. Hızı çok yüksektir.</p>
+                    </div>
+                </a>
+
+                <a href="https://www.hyperhuman.top/rodin" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-icon">🕸️</div>
+                            <div class="tool-title">Rodin (Hyper3D)</div>
+                        </div>
+                        <span class="category-badge">Temiz Mesh Yapısı</span>
+                        [cite_start]<p>[cite: 34, 36] Karmaşık eskizlerden temiz 3D mesh yapıları oluşturma konusunda başarılı, güçlü bir motora sahiptir.</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div id="advanced" class="section">
+                <a href="https://luw.ai" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-icon">🏢</div>
+                            <div class="tool-title">Luw.ai</div>
+                        </div>
+                        <span class="category-badge">Mimari & Artistik</span>
+                        [cite_start]<p>[cite: 38] Mimari ve artistik eskizleri 3D format için optimize etmek üzere tasarlanmıştır.</p>
+                    </div>
+                </a>
+
+                <a href="https://www.blender.org" target="_blank" class="tool-link">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-icon">🟠</div>
+                            <div class="tool-title">Blender</div>
+                        </div>
+                        <span class="category-badge">Sınırsız & Yerel</span>
+                        [cite_start]<p>[cite: 44, 45] Kredi sınırı olmadan bilgisayarınızda kullanabileceğiniz, açık kaynaklı en güçlü 3D tasarım programıdır.</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div id="summary" class="section">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Araç Adı</th>
+                            <th>Öne Çıkan Özellik</th>
+                            <th>Maliyet Yapısı</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Meshy AI</strong></td>
+                            <td>Yüksek kaliteli doku ve mesh</td>
+                            [cite_start]<td>[cite: 27] Günlük yenilenen krediler</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tripo</strong></td>
+                            <td>Eskizden saniyeler içinde model</td>
+                            [cite_start]<td>[cite: 32] Kayıt sonrası ücretsiz kredi</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rodin</strong></td>
+                            <td>Güçlü Image-to-3D motoru</td>
+                            [cite_start]<td>[cite: 35] Kapsamlı ücretsiz deneme</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CSM</strong></td>
+                            <td>Detaylı sonuçlar (Öncü platform)</td>
+                            [cite_start]<td>[cite: 40] Yapay zeka ile 3D modelleme</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Blender</strong></td>
+                            <td>Tam kontrol ve sınırsız kullanım</td>
+                            [cite_start]<td>[cite: 45] Tamamen Ücretsiz</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            const pills = document.querySelectorAll('.nav-pill');
+            pills.forEach(pill => pill.classList.remove('active'));
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
