@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Çizimden Dijital Sanata ve 3D Modele Dönüşüm</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); /* Pastel Mor/Pembe tonları - Sanatsal tema */
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Referans tasarımın başlık renkleri */
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .nav-pills {
+            display: flex;
+            gap: 15px;
+            padding: 30px 40px;
+            background: #f8f9fa;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-pill {
+            padding: 15px 30px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .nav-pill:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.3);
+        }
+        
+        .nav-pill.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tool-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid #764ba2;
+            transition: all 0.3s;
+        }
+        
+        .tool-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 30px rgba(118, 75, 162, 0.2);
+        }
+        
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            box-shadow: 0 4px 10px rgba(118, 75, 162, 0.3);
+        }
+        
+        .tool-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        
+        .tool-description {
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .feature-list {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
+        .feature-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: start;
+            gap: 12px;
+        }
+        
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-icon {
+            color: #764ba2;
+            font-size: 20px;
+            margin-top: 2px;
+        }
+        
+        .link-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
+            margin: 10px 10px 10px 0;
+        }
+        
+        .link-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(118, 75, 162, 0.4);
+        }
+        
+        .category-badge {
+            display: inline-block;
+            padding: 6px 15px;
+            background: #764ba2;
+            color: white;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 5px 5px 5px 0;
+        }
+        
+        .tip-box {
+            background: #fff9e6;
+            border-left: 5px solid #f39c12;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .tip-title {
+            color: #f39c12;
+            font-weight: 700;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: #764ba2;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:hover {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✏️ Artistik Çizimden Dijital Sanata & 3D'ye</h1>
+            <p class="subtitle">Eskizleri Görsele ve 3D Modellere Dönüştürme Araçları</p>
+        </header>
+        
+        <div class="nav-pills">
+            <div class="nav-pill active" onclick="showSection('sketch-to-image')">🎨 Görsel Oluşturma</div>
+            <div class="nav-pill" onclick="showSection('2d-to-3d')">🧊 2D'den 3D'ye (Hızlı)</div>
+            <div class="nav-pill" onclick="showSection('pro-3d')">🏗️ Profesyonel 3D</div>
+            <div class="nav-pill" onclick="showSection('editing')">🛠️ Düzenleme Araçları</div>
+            <div class="nav-pill" onclick="showSection('comparison')">📊 Karşılaştırma</div>
+        </div>
+        
+        <div class="content">
+            <div id="sketch-to-image" class="section active">
+                <h2 style="font-size: 2.2em; color: #2c3e50; margin-bottom: 30px;">Eskizden Görsele ve Dijital Sanat</h2>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🖌️</div>
+                        <div class="tool-title">Zoviz</div>
+                    </div>
+                    <div class="category-badge">Ücretsiz</div>
+                    <div class="category-badge">Eskiz Dönüştürücü</div>
+                    <div class="tool-description">
+                        [cite_start]Basit çizimleri veya moda eskizlerini yükleyip onları gerçekçi fotoğraflara veya dijital sanat eserlerine dönüştürmeyi sağlar[cite: 123].
+                    </div>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">🖼️</span>
+                            [cite_start]<span><strong>Sketch to Image:</strong> Taslakları görsele dönüştürme[cite: 122].</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">📝</span>
+                            [cite_start]<span><strong>Text to Image:</strong> "Japonya sokaklarında kırmızı şapka ve kısa kırmızı etek giymiş..." gibi metinlerden görsel oluşturma[cite: 125, 127].</span>
+                        </div>
+                    </div>
+                    <a href="https://zoviz.com/sketch-to-image" target="_blank" class="link-button">🔗 Zoviz Sketch to Image</a>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">✨</div>
+                        <div class="tool-title">Canva & Fotor</div>
+                    </div>
+                    <div class="category-badge">Popüler</div>
+                    <div class="category-badge">AI Art</div>
+                    <div class="tool-description">
+                        Metin veya referans görseller kullanarak hızlıca sanatsal içerikler üretmek için kullanılan popüler araçlar.
+                    </div>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">🎨</span>
+                            [cite_start]<span><strong>Canva:</strong> Kelimeleri görsele çeviren yapay zeka görsel oluşturma aracı[cite: 138].</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🎭</span>
+                            [cite_start]<span><strong>Fotor:</strong> Basit görsel yükleme veya metin ile sanatsal görseller oluşturma (Ücretsiz plan mevcut)[cite: 139, 140, 141].</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="2d-to-3d" class="section">
+                <h2 style="font-size: 2.2em; color: #2c3e50; margin-bottom: 30px;">2D Görselden 3D Model Oluşturma</h2>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🚀</div>
+                        <div class="tool-title">Luw.ai</div>
+                    </div>
+                    <div class="category-badge">Mimari</div>
+                    <div class="category-badge">Artistik</div>
+                    <div class="tool-description">
+                        [cite_start]Görsel veya metin komutu girerek saniyeler içinde 3D modeller oluşturur[cite: 132].
+                    </div>
+                    <div class="tip-box">
+                        <div class="tip-title">💡 En İyi Kullanım</div>
+                        [cite_start]<div>Özellikle mimari ve artistik eskizleri hızlıca 3D forma sokmak için optimize edilmiştir[cite: 141].</div>
+                    </div>
+                    <a href="https://luw.ai" target="_blank" class="link-button">🔗 Luw.ai</a>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🌌</div>
+                        <div class="tool-title">Dreamina</div>
+                    </div>
+                    <div class="category-badge">Ücretsiz Başlangıç</div>
+                    <div class="tool-description">
+                        [cite_start]Herhangi bir düz görüntüyü yükleyip saniyeler içinde çarpıcı 3D görsellere dönüştüren ücretsiz çevrimiçi yapay zeka oluşturucu[cite: 134, 135].
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🧊</div>
+                        <div class="tool-title">EaseMate</div>
+                    </div>
+                    <div class="category-badge">Web Tabanlı</div>
+                    <div class="tool-description">
+                        2D görüntüleri zahmetsizce ve ücretsiz olarak 3D stiline dönüştürebilirsiniz. [cite_start]Tasarım becerisine veya kayıt olmaya gerek yoktur[cite: 136, 137].
+                    </div>
+                </div>
+            </div>
+
+            <div id="pro-3d" class="section">
+                <h2 style="font-size: 2.2em; color: #2c3e50; margin-bottom: 30px;">Profesyonel Seviye 3D Dönüştürücüler</h2>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">⚡</div>
+                        <div class="tool-title">Meshy.ai</div>
+                    </div>
+                    <div class="category-badge">Yüksek Kalite</div>
+                    <div class="tool-description">
+                        [cite_start]Eskiz ve fotoğraflardan çok hızlı, yüksek kaliteli 3D modeller ve dokular üretir[cite: 141].
+                    </div>
+                    <a href="https://meshy.ai" target="_blank" class="link-button">🔗 Meshy.ai</a>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🔺</div>
+                        <div class="tool-title">Tripo AI</div>
+                    </div>
+                    <div class="category-badge">Image to 3D</div>
+                    <div class="tool-description">
+                        [cite_start]"Image to 3D" özelliği ile eskizleri saniyeler içinde profesyonel seviyede 3D objelere dönüştürür[cite: 141].
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🕸️</div>
+                        <div class="tool-title">Rodin (Hyper3D)</div>
+                    </div>
+                    <div class="category-badge">Mesh Yapısı</div>
+                    <div class="tool-description">
+                        [cite_start]Karmaşık eskizlerden temiz 3D mesh yapıları oluşturma konusunda oldukça başarılıdır[cite: 141].
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">💠</div>
+                        <div class="tool-title">CSM.ai</div>
+                    </div>
+                    <div class="category-badge">Detaylı</div>
+                    <div class="tool-description">
+                        [cite_start]Yapay zeka ile görselden 3D modelleme alanında öncü, detaylı sonuçlar veren bir platformdur[cite: 141].
+                    </div>
+                </div>
+            </div>
+            
+            <div id="editing" class="section">
+                <h2 style="font-size: 2.2em; color: #2c3e50; margin-bottom: 30px;">Görsel İyileştirme ve Düzenleme</h2>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">✂️</div>
+                        <div class="tool-title">Zoviz Düzenleme Araçları</div>
+                    </div>
+                    <div class="category-badge">Pratik</div>
+                    <div class="tool-description">
+                        Eskizlerinizi dijitalleştirmeden önce veya sonra iyileştirmek için kullanılan ücretsiz araçlar.
+                    </div>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">🔳</span>
+                            [cite_start]<span><strong>Arka Plan Kaldırıcı:</strong> Çizimlerin arka planını temizlemek ve şeffaf PNG oluşturmak için[cite: 128].</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🔍</span>
+                            [cite_start]<span><strong>Görsel Kalitesini Artırma (Upscaler):</strong> Bulanık veya düşük çözünürlüklü eskizlerin netliğini 4 kata kadar artırmak için[cite: 129, 130].</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="comparison" class="section">
+                <h2 style="font-size: 2.2em; color: #2c3e50; margin-bottom: 30px;">Araç Karşılaştırma Tablosu</h2>
+                
+                <div class="tip-box">
+                    <div class="tip-title">💰 Freemium Modeli</div>
+                    [cite_start]<div>Bu platformların çoğu "Freemium" modeller sunar; genellikle günlük belirli sayıda (5-10) model ücretsiz oluşturma kredisi verir[cite: 142].</div>
+                </div>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Platform Adı</th>
+                            <th>Öne Çıkan Özellik</th>
+                            <th>Kullanım Alanı</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Meshy.ai</strong></td>
+                            [cite_start]<td>Hızlı ve yüksek kaliteli dokular [cite: 141]</td>
+                            <td>Genel 3D Modelleme</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tripo AI</strong></td>
+                            [cite_start]<td>Saniyeler içinde profesyonel sonuç [cite: 141]</td>
+                            <td>Hızlı Prototipleme</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rodin (Hyper3D)</strong></td>
+                            [cite_start]<td>Temiz 3D mesh yapıları [cite: 141]</td>
+                            <td>Karmaşık Eskizler</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Luw.ai</strong></td>
+                            [cite_start]<td>Artistik eskizler için optimize [cite: 141]</td>
+                            <td>Mimari & Sanat</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CSM.ai</strong></td>
+                            [cite_start]<td>Detaylı sonuçlar [cite: 141]</td>
+                            <td>Detaylı Modelleme</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            // Tüm sectionları gizle
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Tüm butonların aktifliğini kaldır
+            const pills = document.querySelectorAll('.nav-pill');
+            pills.forEach(pill => pill.classList.remove('active'));
+            
+            // Seçilen section'ı göster
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Tıklanan butonu aktif yap
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
