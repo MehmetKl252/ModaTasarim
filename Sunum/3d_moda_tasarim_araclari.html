@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Moda Tasarım Araçları</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .nav-pills {
+            display: flex;
+            gap: 15px;
+            padding: 30px 40px;
+            background: #f8f9fa;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-pill {
+            padding: 15px 30px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .nav-pill:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .nav-pill.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tool-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid #667eea;
+            transition: all 0.3s;
+        }
+        
+        .tool-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.2);
+        }
+        
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+        }
+        
+        .tool-title {
+            font-size: 1.8em;
+            color: #1e3c72;
+            font-weight: 700;
+        }
+        
+        .tool-description {
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .feature-list {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
+        .feature-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: start;
+            gap: 12px;
+        }
+        
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-icon {
+            color: #667eea;
+            font-size: 20px;
+            margin-top: 2px;
+        }
+        
+        .link-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            margin: 10px 10px 10px 0;
+        }
+        
+        .link-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .category-badge {
+            display: inline-block;
+            padding: 6px 15px;
+            background: #667eea;
+            color: white;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 5px 5px 5px 0;
+        }
+        
+        .workflow-section {
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 30px 0;
+        }
+        
+        .workflow-title {
+            text-align: center;
+            font-size: 2em;
+            color: #1e3c72;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        
+        .workflow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+        
+        .workflow-step {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .workflow-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 15px;
+        }
+        
+        .step-title {
+            font-size: 1.3em;
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .step-description {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .tip-box {
+            background: #fff9e6;
+            border-left: 5px solid #f39c12;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .tip-title {
+            color: #f39c12;
+            font-weight: 700;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .comparison-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-title {
+            font-size: 1.4em;
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .pro-con-list {
+            list-style: none;
+        }
+        
+        .pro-con-list li {
+            padding: 8px 0;
+            display: flex;
+            align-items: start;
+            gap: 10px;
+        }
+        
+        .pro {
+            color: #2ecc71;
+        }
+        
+        .con {
+            color: #e74c3c;
+        }
+        
+        .rigging-guide {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border: 2px solid #667eea;
+        }
+        
+        .rigging-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .rigging-point {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+        
+        .rigging-point:hover {
+            border-color: #667eea;
+            transform: scale(1.05);
+        }
+        
+        .point-label {
+            font-weight: 700;
+            color: #1e3c72;
+            margin-bottom: 5px;
+        }
+        
+        .point-name {
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 3D Moda Tasarım Araçları Rehberi</h1>
+            <p class="subtitle">Dijital Moda ve Kumaş Simülasyonu için Kapsamlı Kılavuz</p>
+        </header>
+        
+        <div class="nav-pills">
+            <div class="nav-pill active" onclick="showSection('simulation')">🧵 Kumaş Simülasyonu</div>
+            <div class="nav-pill" onclick="showSection('ai-tools')">🤖 AI Giydirme</div>
+            <div class="nav-pill" onclick="showSection('conversion')">🔄 2D→3D Dönüşüm</div>
+            <div class="nav-pill" onclick="showSection('animation')">💃 Animasyon</div>
+            <div class="nav-pill" onclick="showSection('workflow')">📋 İş Akışı</div>
+        </div>
+        
+        <div class="content">
+            <!-- SIMULATION SECTION -->
+            <div id="simulation" class="section active">
+                <h2 style="font-size: 2.2em; color: #1e3c72; margin-bottom: 30px;">3D Kumaş Simülasyon Araçları</h2>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">👔</div>
+                        <div class="tool-title">CLO 3D</div>
+                    </div>
+                    <div class="category-badge">Endüstri Standardı</div>
+                    <div class="category-badge">Profesyonel</div>
+                    <div class="tool-description">
+                        Moda endüstrisinin standart yazılımı. Dijital kumaşın ağırlığını, dokusunu ve vücut üzerindeki hareketini fizik kurallarına uygun şekilde simüle eder.
+                    </div>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">✨</span>
+                            <span>Yapay zeka destekli otomatik kalıp yerleştirme</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">⚡</span>
+                            <span>Gerçek zamanlı kumaş simülasyonu</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🚶</span>
+                            <span>Hazır podyum sahneleri ve yürüyüş animasyonları</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🎯</div>
+                        <div class="tool-title">Style3D</div>
+                    </div>
+                    <div class="category-badge">AI Odaklı</div>
+                    <div class="category-badge">Hızlı</div>
+                    <div class="tool-description">
+                        CLO 3D'ye en güçlü rakip. Tamamen yapay zeka entegrasyonuna odaklanmış yeni nesil platform.
+                    </div>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">🚀</span>
+                            <span>Çok hızlı kumaş fiziği hesaplamaları</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">👗</span>
+                            <span>Sanal deneme (virtual try-on) özellikleri</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🤖</span>
+                            <span>Tam AI entegrasyonu</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🎮</div>
+                        <div class="tool-title">Marvelous Designer</div>
+                    </div>
+                    <div class="category-badge">Oyun & Film</div>
+                    <div class="category-badge">Profesyonel</div>
+                    <div class="tool-description">
+                        Özellikle oyun ve film endüstrisi için giysi tasarımı ve simülasyonunda rakipsiz.
+                    </div>
+                </div>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <div class="comparison-title">CLO 3D</div>
+                        <ul class="pro-con-list">
+                            <li><span class="pro">✓</span> Endüstri standardı</li>
+                            <li><span class="pro">✓</span> Geniş kumaş kütüphanesi</li>
+                            <li><span class="pro">✓</span> Profesyonel destek</li>
+                            <li><span class="con">✗</span> Pahalı lisans</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-card">
+                        <div class="comparison-title">Style3D</div>
+                        <ul class="pro-con-list">
+                            <li><span class="pro">✓</span> Çok hızlı</li>
+                            <li><span class="pro">✓</span> AI entegrasyonu</li>
+                            <li><span class="pro">✓</span> Modern arayüz</li>
+                            <li><span class="con">✗</span> Yeni platform</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-card">
+                        <div class="comparison-title">Marvelous Designer</div>
+                        <ul class="pro-con-list">
+                            <li><span class="pro">✓</span> Oyun/film için ideal</li>
+                            <li><span class="pro">✓</span> Güçlü simülasyon</li>
+                            <li><span class="pro">✓</span> Esnek kalıplar</li>
+                            <li><span class="con">✗</span> Öğrenme eğrisi</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI TOOLS SECTION -->
+            <div id="ai-tools" class="section">
+                <h2 style="font-size: 2.2em; color: #1e3c72; margin-bottom: 30px;">AI Destekli Giydirme Araçları</h2>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🎨</div>
+                        <div class="tool-title">OOTDiffusion</div>
+                    </div>
+                    <div class="category-badge">Ücretsiz</div>
+                    <div class="category-badge">Başarılı</div>
+                    <div class="tool-description">
+                        Kıyafeti vücuda oturtma konusunda oldukça başarılı AI aracı. HuggingFace üzerinde ücretsiz kullanılabilir.
+                    </div>
+                    <div class="tip-box">
+                        <div class="tip-title">💡 İpucu</div>
+                        <div>Bazen yoğunluktan dolayı hata verebilir. Sayfayı yenileyip tekrar deneyebilirsiniz.</div>
+                    </div>
+                    <a href="https://huggingface.co/spaces/levihsu/OOTDiffusion" target="_blank" class="link-button">🔗 OOTDiffusion Demo</a>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">👥</div>
+                        <div class="tool-title">Outfit Anyone</div>
+                    </div>
+                    <div class="category-badge">Ultra HD</div>
+                    <div class="category-badge">Gelişmiş</div>
+                    <div class="tool-description">
+                        Herhangi bir kıyafet ve herhangi bir kişi için ultra yüksek kaliteli sanal deneme uygulaması. Plus sürümü artık herhangi bir model ve herhangi bir kıyafetle çevrimiçi.
+                    </div>
+                    <a href="https://www.outfitanyone.life/" target="_blank" class="link-button">🔗 Outfit Anyone</a>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🎭</div>
+                        <div class="tool-title">Midjourney</div>
+                    </div>
+                    <div class="category-badge">Prompt-Based</div>
+                    <div class="category-badge">Popüler</div>
+                    <div class="tool-description">
+                        Yapay zekâ destekli görüntü üretme platformu. Text-to-image teknolojisi ile detaylı moda görselleri oluşturur.
+                    </div>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">📝</span>
+                            <span><strong>Örnek Prompt:</strong> "Süper kahraman kostümlü kedi, neon ışıklar, sinematik, ultra detaylı"</span>
+                        </div>
+                    </div>
+                    <a href="https://midjourney.com" target="_blank" class="link-button">🔗 Midjourney</a>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">✏️</div>
+                        <div class="tool-title">Fashion AI Tool</div>
+                    </div>
+                    <div class="category-badge">Freemium</div>
+                    <div class="tool-description">
+                        Taslağı oluştur ve model üzerinde görselleştir. Ücretsiz deneme ile başlayıp, beğenirsen ücretli plana geçebileceğin sistem.
+                    </div>
+                    <a href="https://fashionaitool.com" target="_blank" class="link-button">🔗 Fashion AI Tool</a>
+                </div>
+            </div>
+            
+            <!-- CONVERSION SECTION -->
+            <div id="conversion" class="section">
+                <h2 style="font-size: 2.2em; color: #1e3c72; margin-bottom: 30px;">2D → 3D Dönüşüm Araçları</h2>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">🔮</div>
+                        <div class="tool-title">Trellis 3D</div>
+                    </div>
+                    <div class="category-badge">AI-Powered</div>
+                    <div class="category-badge">Hızlı</div>
+                    <div class="tool-description">
+                        Yapay zeka teknolojisini kullanarak 2D görselleri (fotoğrafları) yüksek kaliteli 3D modellere dönüştüren platform.
+                    </div>
+                    
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">📸</span>
+                            <span><strong>Görselden 3D'ye:</strong> Bir fotoğraf yüklediğinizde, AI görseli analiz ederek nesnenin 3D modelini oluşturur</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🏢</span>
+                            <span><strong>Teknolojik Altyapı:</strong> Microsoft Araştırma ve çeşitli üniversiteler tarafından geliştirilen TRELLIS algoritması</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">📦</span>
+                            <span><strong>Çıktı Formatları:</strong> GLB, 3D Gaussians, Radiance Fields gibi farklı formatlar</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🎯</span>
+                            <span><strong>Kullanım Alanları:</strong> Oyun geliştirme, 3D baskı, görsel tasarım projeleri</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✂️</span>
+                            <span><strong>Düzenleme:</strong> Üretilen modeller üzerinde yerel düzenlemeler yapma imkanı</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <div class="tip-title">💡 Nasıl Kullanılır?</div>
+                        <div>Ana sayfasındaki "Upload Image" (Resim Yükle) alanına fotoğrafınızı sürükleyip bırakın. Saniyeler içinde 3D model hazır!</div>
+                    </div>
+                    
+                    <a href="https://trellis3d.co/" target="_blank" class="link-button">🔗 Trellis 3D (Ücretli)</a>
+                    <a href="https://huggingface.co/spaces/trellis-community/TRELLIS" target="_blank" class="link-button" style="background: #2ecc71;">🆓 Ücretsiz Sürüm</a>
+                    <a href="https://github.com/Microsoft/TRELLIS" target="_blank" class="link-button" style="background: #34495e;">📂 GitHub</a>
+                </div>
+            </div>
+            
+            <!-- ANIMATION SECTION -->
+            <div id="animation" class="section">
+                <h2 style="font-size: 2.2em; color: #1e3c72; margin-bottom: 30px;">3D Model Animasyonu</h2>
+                
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <div class="tool-icon">💃</div>
+                        <div class="tool-title">Adobe Mixamo</div>
+                    </div>
+                    <div class="category-badge">Ücretsiz</div>
+                    <div class="category-badge">Adobe</div>
+                    <div class="tool-description">
+                        Avatarlar için hazır animasyonlar sunan ücretsiz kütüphane. Özellikle "catwalk" (podyum yürüyüşü) gibi animasyonları 3D modellere tek tıkla uygulamak için ideal.
+                    </div>
+                    
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">🎬</span>
+                            <span>Yüzlerce hazır animasyon (yürüyüş, dans, hareket)</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🦴</span>
+                            <span>Otomatik rigging (iskelet sistemi)</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">⚡</span>
+                            <span>Tek tıkla uygulama</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">💰</span>
+                            <span>Tamamen ücretsiz kullanım</span>
+                        </div>
+                    </div>
+                    
+                    <a href="https://www.mixamo.com/" target="_blank" class="link-button">🔗 Adobe Mixamo</a>
+                </div>
+                
+                <div class="rigging-guide">
+                    <h3 style="color: #1e3c72; margin-bottom: 20px; font-size: 1.6em;">🎯 Mixamo Auto-Rigger Rehberi</h3>
+                    <p style="margin-bottom: 20px; line-height: 1.8;">Dosyayı Mixamo'ya yüklediğinizde, karakterin üzerine şu noktaları işaretlemelisiniz:</p>
+                    
+                    <div class="rigging-points">
+                        <div class="rigging-point">
+                            <div class="point-label">Chin</div>
+                            <div class="point-name">Çene Ucu</div>
+                        </div>
+                        <div class="rigging-point">
+                            <div class="point-label">Wrists</div>
+                            <div class="point-name">Bilekler</div>
+                        </div>
+                        <div class="rigging-point">
+                            <div class="point-label">Elbows</div>
+                            <div class="point-name">Dirsekler</div>
+                        </div>
+                        <div class="rigging-point">
+                            <div class="point-label">Knees</div>
+                            <div class="point-name">Diz Kapakları</div>
+                        </div>
+                        <div class="rigging-point">
+                            <div class="point-label">Groin</div>
+                            <div class="point-name">Kasık Bölgesi</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- WORKFLOW SECTION -->
+            <div id="workflow" class="section">
+                <div class="workflow-section">
+                    <div class="workflow-title">🔄 Komple İş Akışı</div>
+                    <p style="text-align: center; font-size: 1.1em; color: #666; margin-bottom: 30px;">
+                        2D fotoğraftan animasyonlu 3D modele kadar tam süreç
+                    </p>
+                    
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-title">2D Görsel Hazırla</div>
+                            <div class="step-description">Tasarımınızın fotoğrafını veya çizimini hazırlayın</div>
+                        </div>
+                        
+                        <div class="workflow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-title">Trellis 3D</div>
+                            <div class="step-description">2D görselinizi Trellis 3D'ye yükleyin ve 3D model oluşturun</div>
+                        </div>
+                        
+                        <div class="workflow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-title">Model İndirme</div>
+                            <div class="step-description">GLB veya OBJ formatında 3D modelinizi indirin</div>
+                        </div>
+                        
+                        <div class="workflow-step">
+                            <div class="step-number">4</div>
+                            <div class="step-title">Mixamo'ya Yükle</div>
+                            <div class="step-description">3D modelinizi Mixamo'ya yükleyin ve Auto-Rigging yapın</div>
+                        </div>
+                        
+                        <div class="workflow-step">
+                            <div class="step-number">5</div>
+                            <div class="step-title">Animasyon Seç</div>
+                            <div class="step-description">Catwalk, yürüyüş veya dans animasyonu seçin ve uygulayın</div>
+                        </div>
+                        
+                        <div class="workflow-step">
+                            <div class="step-number">6</div>
+                            <div class="step-title">Proje Tamamı</div>
+                            <div class="step-description">Animasyonlu modelinizi indirin ve projenizde kullanın!</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tool-card" style="margin-top: 40px;">
+                    <h3 style="color: #1e3c72; margin-bottom: 20px; font-size: 1.8em;">📚 Hızlı Karşılaştırma Tablosu</h3>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                        <thead>
+                            <tr style="background: #667eea; color: white;">
+                                <th style="padding: 15px; text-align: left;">Araç</th>
+                                <th style="padding: 15px; text-align: left;">Ana Özellik</th>
+                                <th style="padding: 15px; text-align: left;">Fiyat</th>
+                                <th style="padding: 15px; text-align: left;">Kullanım Alanı</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background: #f8f9fa;">
+                                <td style="padding: 15px; font-weight: 600;">CLO 3D</td>
+                                <td style="padding: 15px;">Profesyonel kumaş simülasyonu</td>
+                                <td style="padding: 15px;">💰 Ücretli</td>
+                                <td style="padding: 15px;">Moda endüstrisi</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 15px; font-weight: 600;">Style3D</td>
+                                <td style="padding: 15px;">AI destekli hızlı simülasyon</td>
+                                <td style="padding: 15px;">💰 Ücretli</td>
+                                <td style="padding: 15px;">Moda & Tekstil</td>
+                            </tr>
+                            <tr style="background: #f8f9fa;">
+                                <td style="padding: 15px; font-weight: 600;">Marvelous Designer</td>
+                                <td style="padding: 15px;">Oyun/film için giysi</td>
+                                <td style="padding: 15px;">💰 Ücretli</td>
+                                <td style="padding: 15px;">Oyun & Film</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 15px; font-weight: 600;">OOTDiffusion</td>
+                                <td style="padding: 15px;">AI sanal deneme</td>
+                                <td style="padding: 15px;">🆓 Ücretsiz</td>
+                                <td style="padding: 15px;">Hızlı test</td>
+                            </tr>
+                            <tr style="background: #f8f9fa;">
+                                <td style="padding: 15px; font-weight: 600;">Outfit Anyone</td>
+                                <td style="padding: 15px;">Ultra HD giydirme</td>
+                                <td style="padding: 15px;">💰 Ücretli</td>
+                                <td style="padding: 15px;">E-ticaret</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 15px; font-weight: 600;">Trellis 3D</td>
+                                <td style="padding: 15px;">2D→3D dönüşüm</td>
+                                <td style="padding: 15px;">💰/🆓 İkisi de</td>
+                                <td style="padding: 15px;">3D modelleme</td>
+                            </tr>
+                            <tr style="background: #f8f9fa;">
+                                <td style="padding: 15px; font-weight: 600;">Mixamo</td>
+                                <td style="padding: 15px;">Karakter animasyonu</td>
+                                <td style="padding: 15px;">🆓 Ücretsiz</td>
+                                <td style="padding: 15px;">Animasyon</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 15px; font-weight: 600;">Midjourney</td>
+                                <td style="padding: 15px;">AI görsel üretimi</td>
+                                <td style="padding: 15px;">💰 Ücretli</td>
+                                <td style="padding: 15px;">Konsept tasarım</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="tip-box" style="margin-top: 30px;">
+                    <div class="tip-title">🎯 Başlangıç İçin Öneri</div>
+                    <div style="line-height: 1.8;">
+                        <strong>Ücretsiz Başlangıç Paketi:</strong><br>
+                        1. <strong>Midjourney</strong> - Konsept görsel oluşturun (sınırlı ücretsiz)<br>
+                        2. <strong>Trellis 3D (HuggingFace)</strong> - Ücretsiz 2D→3D dönüşüm<br>
+                        3. <strong>Mixamo</strong> - Ücretsiz animasyon ekleyin<br>
+                        4. <strong>OOTDiffusion</strong> - Ücretsiz sanal deneme<br><br>
+                        
+                        <strong>Profesyonel Paket (Ücretli):</strong><br>
+                        1. <strong>CLO 3D</strong> veya <strong>Style3D</strong> - Profesyonel kumaş simülasyonu<br>
+                        2. <strong>Outfit Anyone</strong> - Yüksek kaliteli giydirme<br>
+                        3. <strong>Marvelous Designer</strong> - Gelişmiş simülasyon
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Remove active class from all pills
+            const pills = document.querySelectorAll('.nav-pill');
+            pills.forEach(pill => pill.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked pill
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
