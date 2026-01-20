@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Çizimden Dijital Sanata ve 3D Modele Dönüşüm</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); /* Pastel Mor/Pembe tonları - Sanatsal tema */
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Referans tasarımın başlık renkleri */
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .nav-pills {
+            display: flex;
+            gap: 15px;
+            padding: 30px 40px;
+            background: #f8f9fa;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-pill {
+            padding: 12px 25px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            color: #666;
+        }
+        
+        .nav-pill:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+        
+        .nav-pill.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .info-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+
+        /* Link Stilleri */
+        .tool-link {
+            color: #764ba2;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .tool-link:hover {
+            text-decoration: underline;
+            color: #667eea;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+        }
+        
+        th, td {
+            padding: 18px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            color: #333;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+        
+        tr:hover {
+            background-color: #fcfaff;
+        }
+        
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        
+        .status-pro { background: #e3f2fd; color: #1976d2; }
+        .status-free { background: #e8f5e9; color: #2e7d32; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✏️ Eskizden Dijital Sanata ve 3D Modellemeye</h1>
+            <p class="subtitle">Moda Tasarımında Çizimlerin Yapay Zeka ile Dönüşümü</p>
+        </header>
+        
+        <div class="nav-pills">
+            <div class="nav-pill active" onclick="showSection('sketch-to-image')">🎨 Eskizden Görsele</div>
+            <div class="nav-pill" onclick="showSection('image-to-3d')">🧊 2D'den 3D'ye</div>
+            <div class="nav-pill" onclick="showSection('upscaling')">✨ İyileştirme & Detay</div>
+        </div>
+        
+        <div class="content">
+            <div id="sketch-to-image" class="section active">
+                <div class="info-card">
+                    <h3>💡 Eskiz Renklendirme ve Stilize Etme</h3>
+                    <p>Elde çizilen veya dijital ortamda hazırlanan basit taslakların profesyonel moda illüstrasyonlarına dönüştürülmesi.</p>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Araç</th>
+                            <th>Açıklama</th>
+                            <th>Özellik</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="https://leonardo.ai" target="_blank" class="tool-link"><strong>Leonardo.ai (Canvas)</strong></a></td>
+                            <td>Eskiz yükleyip üzerine boyama yapma</td>
+                            <td>Kumaş dokusu ekleme</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.vizcom.ai" target="_blank" class="tool-link"><strong>Vizcom</strong></a></td>
+                            <td>Çizimleri saniyeler içinde render alma</td>
+                            <td>Endüstriyel tasarım kalitesi</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://promeai.com" target="_blank" class="tool-link"><strong>PromeAI</strong></a></td>
+                            <td>Eskizden fotogerçekçi görsele</td>
+                            <td>Moda tasarımı modları</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="image-to-3d" class="section">
+                <div class="info-card">
+                    <h3>🏗️ 3D Model Oluşturma Araçları</h3>
+                    <p>Hazırlanan 2D görsellerin veya teknik çizimlerin 3B modellere dönüştürülmesi.</p>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Araç</th>
+                            <th>Açıklama</th>
+                            <th>Kullanım Alanı</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="https://www.meshy.ai" target="_blank" class="tool-link"><strong>Meshy.ai</strong></a></td>
+                            <td>Yüksek kaliteli 3D model ve doku üretimi</td>
+                            <td>Hızlı Prototipleme</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.hyperhuman.top/rodin" target="_blank" class="tool-link"><strong>Rodin (Hyper3D)</strong></a></td>
+                            <td>Temiz 3D mesh yapıları</td>
+                            <td>Karmaşık Eskizler</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://www.luw.ai" target="_blank" class="tool-link"><strong>Luw.ai</strong></a></td>
+                            <td>Artistik eskizler için optimize</td>
+                            <td>Mimari & Sanat</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://csm.ai" target="_blank" class="tool-link"><strong>CSM.ai</strong></a></td>
+                            <td>Detaylı sonuçlar</td>
+                            <td>Detaylı Modelleme</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="upscaling" class="section">
+                <div class="info-card">
+                    <h3>✨ Görsel İyileştirme ve Düzenleme</h3>
+                    <p>Çıktıların çözünürlüğünü artırma ve detaylarını profesyonel seviyeye taşıma.</p>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Araç</th>
+                            <th>Açıklama</th>
+                            <th>Sonuç</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="https://magnific.ai" target="_blank" class="tool-link"><strong>Magnific AI</strong></a></td>
+                            <td>Görseli yeniden yapılandırarak detay ekleme</td>
+                            <td>Ultra Yüksek Çözünürlük</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://vanceai.com" target="_blank" class="tool-link"><strong>VanceAI</strong></a></td>
+                            <td>Düşük çözünürlüklü çizimleri netleştirme</td>
+                            <td>Kaliteli Portfolyo Görseli</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            // Tüm sectionları gizle
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Tüm butonların aktifliğini kaldır
+            const pills = document.querySelectorAll('.nav-pill');
+            pills.forEach(pill => pill.classList.remove('active'));
+            
+            // Seçilen section'ı göster
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Tıklanan butonu aktif yap
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
